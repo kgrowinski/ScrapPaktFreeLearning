@@ -77,12 +77,34 @@ func scrape() {
 	fmt.Println("response Body:", string(body))
 }
 
+func determineListenAddress() (string, error) {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "", fmt.Errorf("$PORT not set")
+	}
+	return ":" + port, nil
+}
+func hello(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "Hello World")
+}
+
 func init() {
 	gotenv.Load()
 }
+
 func main() {
 	scrape()
 	if len(os.Args) >= 2 && os.Args[1] == "scrape_param" {
 		scrape()
+	} else {
+		addr, err := determineListenAddress()
+		if err != nil {
+			log.Fatal(err)
+		}
+		http.HandleFunc("/", hello)
+		log.Printf("Listening on %s...\n", addr)
+		if err := http.ListenAndServe(addr, nil); err != nil {
+			panic(err)
+		}
 	}
 }
