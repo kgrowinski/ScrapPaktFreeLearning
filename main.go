@@ -6,10 +6,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/jasonlvhit/gocron"
+	"github.com/subosito/gotenv"
 )
 
 func getImageURL(image string) (URL string) {
@@ -22,7 +23,7 @@ func getImageURL(image string) (URL string) {
 func scrape() {
 	// Request the HTML page.
 	URL := "https://www.packtpub.com/packt/offers/free-learning"
-	temsWebHook := "https://outlook.office.com/webhook/1e016c31-31d6-431a-9596-4ce52e73c184@d8b0675b-bea4-4002-9289-1da6ecc1ab6c/IncomingWebhook/8580c5d7a5894b0e8dc55f133a9d86aa/4cde4289-a034-4f8b-bee9-5dcf62170dec"
+	temsWebHook := os.Getenv("WEBHOOK")
 	res, err := http.Get(URL)
 	if err != nil {
 		log.Fatal(err)
@@ -59,6 +60,7 @@ func scrape() {
 		}]
 	}`, title, imageURL, URL)
 	fmt.Println(message)
+	fmt.Println(temsWebHook)
 
 	req, err := http.NewRequest("POST", temsWebHook, bytes.NewBuffer([]byte(message)))
 	req.Header.Set("Content-Type", "application/json")
@@ -76,9 +78,9 @@ func scrape() {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 }
-
+func init() {
+	gotenv.Load()
+}
 func main() {
-	s := gocron.NewScheduler()
-	s.Every(24).Hours().Do(scrape)
-	<-s.Start()
+	scrape()
 }
