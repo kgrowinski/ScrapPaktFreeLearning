@@ -39,7 +39,7 @@ func scrape() {
 		log.Fatal(err)
 	}
 
-	// Find the review items
+	// Find the items
 	image := doc.Find("#deal-of-the-day").Find("noscript").Text()
 	title := doc.Find("#title-bar-title").Text()
 	imageURL := getImageURL(image)
@@ -59,8 +59,6 @@ func scrape() {
 			"markdown": true
 		}]
 	}`, title, imageURL, URL)
-	fmt.Println(message)
-	fmt.Println(temsWebHook)
 
 	req, err := http.NewRequest("POST", temsWebHook, bytes.NewBuffer([]byte(message)))
 	req.Header.Set("Content-Type", "application/json")
@@ -78,9 +76,13 @@ func scrape() {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 }
+
 func init() {
 	gotenv.Load()
 }
 func main() {
 	scrape()
+	if len(os.Args) >= 2 && os.Args[1] == "scrape_param" {
+		scrape()
+	}
 }
