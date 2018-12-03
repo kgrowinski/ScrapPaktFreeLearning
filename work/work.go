@@ -1,4 +1,4 @@
-package main
+package work
 
 import (
 	"bytes"
@@ -81,7 +81,7 @@ func scrape() {
 	fmt.Println("response Body:", string(body))
 }
 
-func Worker() {
+func work() {
 
 	scrape()
 }
