@@ -1,1 +1,2 @@
 web: ScrapPaktFreeLearning
+worker: work
