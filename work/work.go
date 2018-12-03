@@ -81,7 +81,7 @@ func scrape() {
 	fmt.Println("response Body:", string(body))
 }
 
-func Worker() {
+func main() {
 	// scrape free learning title
 	scrape()
 }
