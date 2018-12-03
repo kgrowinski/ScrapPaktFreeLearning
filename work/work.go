@@ -1,4 +1,4 @@
-package Worker
+package main
 
 import (
 	"bytes"
@@ -82,6 +82,6 @@ func scrape() {
 }
 
 func Worker() {
-	// scrape free learning title
+
 	scrape()
 }
