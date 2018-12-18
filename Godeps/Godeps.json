@@ -1,33 +1,12 @@
 {
-	"ImportPath": "ScrapPaktFreeLearning",
+	"ImportPath": "github.com/krzysztof.growinski/ScrapPaktFreeLearning",
 	"GoVersion": "go1.11",
 	"GodepVersion": "v80",
-	"Packages": [
-		"./..."
-	],
 	"Deps": [
-		{
-			"ImportPath": "github.com/PuerkitoBio/goquery",
-			"Comment": "v1.5.0",
-			"Rev": "2d2796f41742ece03e8086188fa4db16a3a0b458"
-		},
-		{
-			"ImportPath": "github.com/andybalholm/cascadia",
-			"Comment": "v1.0.0-2-g680b6a5",
-			"Rev": "680b6a57bda4f657485ad44bdea42342ead737bc"
-		},
 		{
 			"ImportPath": "github.com/subosito/gotenv",
 			"Comment": "v1.1.1",
 			"Rev": "69b5b6104433beb2cb9c3ce00bdadf3c7c2d3f34"
-		},
-		{
-			"ImportPath": "golang.org/x/net/html",
-			"Rev": "fae4c4e3ad76c295c3d6d259f898136b4bf833a8"
-		},
-		{
-			"ImportPath": "golang.org/x/net/html/atom",
-			"Rev": "fae4c4e3ad76c295c3d6d259f898136b4bf833a8"
 		}
 	]
 }
